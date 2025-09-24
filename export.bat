@@ -32,5 +32,6 @@ exit /b
 :exporttex
   @echo on
   xcopy "%scriptdir%LaTeX" "%curdir%tex" /-Y /E /I
+  xcopy "%scriptdir%makezip.ps1" "%curdir%makezip.ps1" /-Y
   @echo off
   goto :eof
