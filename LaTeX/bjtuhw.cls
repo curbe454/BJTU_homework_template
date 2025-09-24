@@ -1,12 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{bjtuhw}
 
-% inherit from ctexart
+% 从ctexart继承文档类 inherit from ctexart
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexart}}
 \ProcessOptions\relax
 \LoadClass[UTF8]{ctexart}
 
-% require package
+% 引入包 require package {{{
 \RequirePackage{geometry}
 
 \RequirePackage{xcolor}
@@ -20,13 +20,28 @@
 
 \RequirePackage{graphics}
 
+\RequirePackage{etoolbox}
+% }}}
+
 
 \geometry{a4paper,scale=0.8}
+
+% 水印 watermark {{{
+\RequirePackage{draftwatermark}
+\SetWatermarkText{\@studentid\@author}
+\SetWatermarkScale{0.5}
+\SetWatermarkLightness{0.9} % Set transparency (0 = dark, 1 = light)
+% }}}
+
+% 文本格式 text format {{{
 
 % 正文格式
 \AtBeginDocument{
 	\zihao{4}
 }
+
+% 代码格式
+\AtBeginEnvironment{minted}{\zihao{6}}
 
 % 各级别标题格式
 \ctexset{
@@ -39,14 +54,9 @@
 	  % afterskip = 1.0ex plus .2ex, % 段后间距
 	 },
 }
+% }}}
 
-% 水印
-\RequirePackage{draftwatermark}
-\SetWatermarkText{\@studentid\@author}
-\SetWatermarkScale{0.5}
-\SetWatermarkLightness{0.8} % Set transparency (0 = dark, 1 = light)
-
-% maketitle
+% 标题页 maketitle {{{
 \newcommand{\@department}{\relax}
 \newcommand{\@studentid}{\relax}
 \newcommand{\@supervisor}{\relax}
@@ -105,5 +115,6 @@
 	% 重置背景图片
 	\ClearShipoutPictureBG
 }
+% }}}
 
-% vim: set fdm=marker
+% vim: set fdm=marker:
